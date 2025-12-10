@@ -16,27 +16,34 @@ import pageobjects.ShoppingCart;
 import pageobjects.SignInPage;
 
 public class EndtoEndTest extends BaseClass {
-	HomePage hp; MyAccount account;
-	SignInPage signin; IndexPage index;
+	HomePage hp;
+	MyAccount account;
+	SignInPage signin;
+	IndexPage index;
 	SearchResultPage searchpage;
-	AddtoCart add2cart; ShoppingCart shoppingcart;
+	AddtoCart add2cart;
+	ShoppingCart shoppingcart;
 	CheckoutPage checkout;
 
-	@BeforeMethod(groups = {"Smoke","Sanity","Regression"})
+	@BeforeMethod(groups = { "Smoke", "Sanity", "Regression" })
 	public void setup() {
-		launchapp(); snaps("EndtoEndTest");
+		launchapp();
+		snaps("EndtoEndTest");
 	}
-	
-	@AfterMethod(groups = {"Smoke","Sanity","Regression"})
+
+	@AfterMethod(groups = { "Smoke", "Sanity", "Regression" })
 	public void teardown() {
 		driver.quit();
 	}
-	
+
 	@Test(groups = "Regression")
 	public void End2EndTest() throws Throwable {
-		hp = new HomePage();index = new IndexPage();
-		account = new MyAccount();signin = hp.clickonsignin();
-		searchpage = new SearchResultPage();add2cart = new AddtoCart();
+		hp = new HomePage();
+		index = new IndexPage();
+		account = new MyAccount();
+		signin = hp.clickonsignin();
+		searchpage = new SearchResultPage();
+		add2cart = new AddtoCart();
 		signin.login(prop.getProperty("Username"));
 		index = signin.pw(prop.getProperty("Password"));
 		index.searchproduct(prop.getProperty("ProductName"));
@@ -52,22 +59,19 @@ public class EndtoEndTest extends BaseClass {
 		checkout.clickship();
 		boolean result = checkout.seeordersummary();
 		Assert.assertTrue(result);
-		
+
 		String totalitem = checkout.getitem();
 		System.out.println(totalitem);
-		
+
 		String totalprice = checkout.getamt();
 		System.out.println(totalprice);
-		
+
 		checkout.clickonamazon();
 		checkout.clickreturntocart();
 		checkout.clickonsaveforlater();
 		hp.clickhomepage();
 		System.out.println("!!End to End Testing Completed!!");
-		
-		
+
 	}
-	
-	
-	
+
 }

@@ -7,25 +7,28 @@ import org.openqa.selenium.support.PageFactory;
 import actionDriver.Actionclass;
 import basepackage.BaseClass;
 
-public class SignInPage extends BaseClass{
-	
-	@FindBy(id="ap_email")WebElement signin;
-	@FindBy(id="continue")WebElement continuebtn;
-	@FindBy(id="ap_password")WebElement password;
-	@FindBy(id="signInSubmit")WebElement submitbtn;
-	@FindBy(name="rememberMe")WebElement remebermechkbox;
+public class SignInPage extends BaseClass {
 
-	
-	
+	@FindBy(id = "ap_email")
+	WebElement signin;
+	@FindBy(id = "continue")
+	WebElement continuebtn;
+	@FindBy(id = "ap_password")
+	WebElement password;
+	@FindBy(id = "signInSubmit")
+	WebElement submitbtn;
+	@FindBy(name = "rememberMe")
+	WebElement remebermechkbox;
+
 	public SignInPage() {
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public void login(String email) {
 		Actionclass.type(signin, email);
 		Actionclass.click(driver, continuebtn);
 	}
-	
+
 	public IndexPage pw(String pswd) throws Throwable {
 		Actionclass.type(password, pswd);
 		Actionclass.click(driver, remebermechkbox);

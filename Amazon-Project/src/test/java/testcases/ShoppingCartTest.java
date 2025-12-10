@@ -15,25 +15,30 @@ import pageobjects.ShoppingCart;
 import pageobjects.SignInPage;
 
 public class ShoppingCartTest extends BaseClass {
-	HomePage hp; MyAccount account;
-	SignInPage signin; IndexPage index;
+	HomePage hp;
+	MyAccount account;
+	SignInPage signin;
+	IndexPage index;
 	SearchResultPage searchpage;
-	AddtoCart add2cart; ShoppingCart shoppingcart;
+	AddtoCart add2cart;
+	ShoppingCart shoppingcart;
 	CheckoutPage checkout;
 
-	@BeforeMethod(groups = {"Smoke","Sanity","Regression"})
+	@BeforeMethod(groups = { "Smoke", "Sanity", "Regression" })
 	public void setup() {
-		launchapp();snaps("ShoppingCartTest");
+		launchapp();
+		snaps("ShoppingCartTest");
 	}
-	
-	@AfterMethod(groups = {"Smoke","Sanity","Regression"})
+
+	@AfterMethod(groups = { "Smoke", "Sanity", "Regression" })
 	public void teardown() {
 		driver.quit();
 	}
-	
-	@Test(groups = {"Smoke","Regression"})
+
+	@Test(groups = { "Smoke", "Regression" })
 	public void openshoppingcart() throws Throwable {
-		hp = new HomePage();index = new IndexPage();
+		hp = new HomePage();
+		index = new IndexPage();
 		account = new MyAccount();
 		signin = hp.clickonsignin();
 		signin.login(prop.getProperty("Username"));
@@ -43,16 +48,15 @@ public class ShoppingCartTest extends BaseClass {
 		Thread.sleep(500);
 		String result = shoppingcart.confirmitemincart();
 		System.out.println(result);
-		
+
 		String display = shoppingcart.checkproductqty();
 		System.out.println(display);
-		
+
 		String newqty = shoppingcart.changeprdqty("1");
 		System.out.println("QTY: " + newqty);
-		
-		checkout = shoppingcart.clickproccedtocheckout();
-	
-	}
 
+		checkout = shoppingcart.clickproccedtocheckout();
+
+	}
 
 }

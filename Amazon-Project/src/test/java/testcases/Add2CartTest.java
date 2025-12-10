@@ -14,31 +14,36 @@ import pageobjects.SearchResultPage;
 import pageobjects.SignInPage;
 
 public class Add2CartTest extends BaseClass {
-	HomePage hp; MyAccount account;
-	SignInPage signin; IndexPage index;
+	HomePage hp;
+	MyAccount account;
+	SignInPage signin;
+	IndexPage index;
 	SearchResultPage searchpage;
 	AddtoCart add2cart;
 
-	@BeforeMethod(groups = {"Smoke","Sanity","Regression"})
+	@BeforeMethod(groups = { "Smoke", "Sanity", "Regression" })
 	public void setup() {
-		launchapp();snaps("Add2CartTest");
+		launchapp();
+		snaps("Add2CartTest");
 	}
-	
-	@AfterMethod(groups = {"Smoke","Sanity","Regression"})
+
+	@AfterMethod(groups = { "Smoke", "Sanity", "Regression" })
 	public void teardown() {
 		driver.quit();
 	}
-	
-	@Test (groups = {"Smoke","Regression"})
-	
+
+	@Test(groups = { "Smoke", "Regression" })
+
 	public void addproducttocart() throws Throwable {
-		
-		hp = new HomePage();index = new IndexPage();
+
+		hp = new HomePage();
+		index = new IndexPage();
 		signin = hp.clickonsignin();
 		signin.login(prop.getProperty("Username"));
 		index = signin.pw(prop.getProperty("Password"));
 		index.searchproduct(prop.getProperty("ProductName"));
-		Thread.sleep(500); searchpage = new SearchResultPage();
+		Thread.sleep(500);
+		searchpage = new SearchResultPage();
 		searchpage.chooseproduct();
 		add2cart = new AddtoCart();
 		add2cart.enterquantity("2");
@@ -48,25 +53,9 @@ public class Add2CartTest extends BaseClass {
 		Thread.sleep(500);
 		boolean result = add2cart.confirmadded();
 		Assert.assertTrue(result);
-		System.out.println("Assert :" + result  + 
-				" = The product is added to cart successfully!!");
-		
+		System.out.println("Assert :" + result + " = The product is added to cart successfully!!");
+
 		account = add2cart.clickonmenubtn();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
